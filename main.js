@@ -1,3 +1,4 @@
+//issues: 404 error when using link, thus fails to fetch articles
 document.querySelectorAll('input[name="sort"], input[name="time"]').forEach(input => {
     input.addEventListener('change', fetchAndDisplayArticles);
 });
