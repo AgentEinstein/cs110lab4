@@ -1,33 +1,59 @@
-//issues: 404 error when using link, thus fails to fetch articles
-document.querySelectorAll('input[name="sort"], input[name="time"]').forEach(input => {
-    input.addEventListener('change', fetchAndDisplayArticles);
+document.addEventListener('DOMContentLoaded', () => {
+    const defaultSort = document.querySelector('input[name="sort"]:checked').value;
+    const defaultTime = document.querySelector('input[name="time"]:checked').value;
+    fetchAndDisplayArticles(defaultSort, defaultTime);
 });
 
-async function fetchAndDisplayArticles() {
+
+document.querySelectorAll('input[name="sort"], input[name="time"]').forEach(input => {
+    input.addEventListener('change', handleSelectionChange);
+});
+
+
+function handleSelectionChange() {
     const sort = document.querySelector('input[name="sort"]:checked').value;
     const time = document.querySelector('input[name="time"]:checked').value;
-    const articlesContainer = document.getElementById('articles-container');
+    fetchAndDisplayArticles(sort, time);
+}
+
+async function fetchAndDisplayArticles(sort, time) {
     const apiKey = '6IPGoI88rQjGxo4NvU9hAOrbYjMxoUaW'; 
     const url = `https://api.nytimes.com/svc/mostpopular/v2/${sort}/${time}.json?api-key=${apiKey}`;
 
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
-        articlesContainer.innerHTML = ''; // Clear previous articles
-        data.results.slice(0, 5).forEach((article, index) => {
-            const articleHTML = `
-                <div class="article">
-                    <img src="${article.media[0]['media-metadata'][2].url}" alt="${article.title}">
-                    <h2>${article.title}</h2>
-                    <p>${article.abstract}</p>
-                    <p>Published on: ${article.published_date}</p>
-                </div>
-            `;
-            articlesContainer.innerHTML += articleHTML;
-        });
+        displayArticles(data.results);
     } catch (error) {
         console.error('Failed to fetch articles:', error);
     }
 }
 
-fetchAndDisplayArticles(); // Initial fetch on page load
+function displayArticles(articles) {
+    const container = document.getElementById('articles-container');
+    container.innerHTML = ''; 
+    articles.slice(0, 5).forEach(article => {
+        const articleHTML = createArticleHTML(article);
+        container.innerHTML += articleHTML;
+    });
+}
+
+function createArticleHTML(article) {
+    const imageUrl = article.media.length > 0 ? article.media[0]['media-metadata'][2].url : 'placeholder.jpg';
+    return `
+    <div class="article">
+    <div class="article-header">
+    <h2 class="article-title">${article.title}</h2>
+        <p class="article-date">${article.published_date}</p>
+    </div>
+    <div class="article-content">
+        <img src="${imageUrl}" alt="${article.title}">
+        <p>${article.abstract}</p>
+    </div>
+</div>
+
+    `;
+}

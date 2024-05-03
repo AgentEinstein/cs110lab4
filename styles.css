@@ -1,32 +1,75 @@
 body {
     display: flex;
+    flex-direction: row;
     font-family: Arial, sans-serif;
+    background-color: #272b33;
 }
 
 .sidebar {
-    padding: 20px;
-    width: 200px;
-    height: 100vh;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-
-.articles-container {
-    flex-grow: 1;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.article {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
     padding: 10px;
+    margin: 40px;
+    width: 350px;
+    height: 310px;
+    border-radius: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: white;  
 }
+
+.articles-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+  }
+  
+  .articles-container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    background: #acaeb1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative; 
+    width: 80%;
+  }
+  .article-header {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+}
+.article-title {
+    max-width: calc(100% - 100px); 
+}
+
+.article-date {
+    position: absolute;  
+    top: 10px;  
+    right: 10px;  
+    font-size: 0.85em;  
+    color: #303030; 
+}
+
+.article-content {
+    display: flex;
+    align-items: center;  
+    margin-top: 10px; 
+}
+
 
 .article img {
-    width: 100%;
+    width: 150px;
     height: auto;
+    border-radius: 25px;
 }
 
 .article h2 {
@@ -35,13 +78,29 @@ body {
 
 .article p {
     font-size: 14px;
-    color: #666;
+    color: #303030;
+    padding: 10px;
 }
 
 input[type="radio"] {
     margin-right: 10px;
 }
-
 label {
     font-size: 14px;
+}
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 250px; 
+        height:auto; 
+        padding: 10px; 
+        margin: auto;
+    }
+    .articles-container, .article {
+        width: 100%;  
+        padding: 10px;
+        margin: auto;
+    }
 }

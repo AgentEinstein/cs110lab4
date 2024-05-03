@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>NYT Trending Articles</title>
-</head>
-<body>
-    <div class="sidebar">
-        <h3>Filter</h3>
-        <div>
-            <h4>Sort By:</h4>
-            <input type="radio" id="viewed" name="sort" value="viewed" checked>
-            <label for="viewed">Most Viewed</label><br>
-            <input type="radio" id="shared" name="sort" value="shared">
-            <label for="shared">Most Shared</label><br>
-            <input type="radio" id="emailed" name="sort" value="emailed">
-            <label for="emailed">Most Emailed</label>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New York Times Most Popular Articles</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="sidebar">
+            <h3>Filter</h3>
+            <div>
+                <h4>Sort By:</h4>
+                <input type="radio" id="viewed" name="sort" value="viewed" checked>
+                <label for="viewed">Most Viewed</label><br>
+                <input type="radio" id="shared" name="sort" value="shared">
+                <label for="shared">Most Shared</label><br>
+                <input type="radio" id="emailed" name="sort" value="emailed">
+                <label for="emailed">Most Emailed</label>
+            </div>
+            <div>
+                <h4>Time Frame:</h4>
+                <input type="radio" id="day" name="time" value="1" checked>
+                <label for="day">Day</label><br>
+                <input type="radio" id="week" name="time" value="7">
+                <label for="week">Week</label><br>
+                <input type="radio" id="month" name="time" value="30">
+                <label for="month">Month</label>
+            </div>
         </div>
-        <div>
-            <h4>Time Frame:</h4>
-            <input type="radio" id="day" name="time" value="day" checked>
-            <label for="day">Day</label><br>
-            <input type="radio" id="week" name="time" value="week">
-            <label for="week">Week</label><br>
-            <input type="radio" id="month" name="time" value="month">
-            <label for="month">Month</label>
+        <div class="articles-wrapper">
+        <div id="articles-container" class="articles-container">
         </div>
     </div>
-    <div id="articles-container" class="articles-container"></div>
-    <script src="main.js"></script>
-</body>
-</html>
+        <script src="main.js"></script>
+    </body>
+    </html>
